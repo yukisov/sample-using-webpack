@@ -1,3 +1,17 @@
+var webpack = require('webpack'),
+    definePlugin = new webpack.DefinePlugin({
+  __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true')),
+  __PRERELEASE__: JSON.stringify(JSON.parse(process.env.BUILD_PRERELEASE || 'false')),
+  __FOO__: true,
+  __BAR__: function() {},
+  VERSION: JSON.stringify("5fa3b9"),
+  //BERSION: "5fa3b9",
+  BERSION: JSON.stringify("Hello"),
+  //BERSION: "Hello",
+  TWO: "1+1",
+  "typeof window": JSON.stringify("object")
+});
+
 module.exports = {
   entry: {
     app: "./src/js/entry.js"
@@ -33,5 +47,8 @@ module.exports = {
   },
   eslint: {
     configFile: './.eslintrc'
-  }
+  },
+  plugins: [
+    definePlugin
+  ]
 };
